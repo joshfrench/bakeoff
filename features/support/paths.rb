@@ -23,7 +23,7 @@ module NavigationHelpers
       '/entries'
 
     when /the new ballot page/
-      '/ballots/new'
+      '/vote'
 
     else
       raise "Can't find mapping from \"#{page_name}\" to a path.\n" +

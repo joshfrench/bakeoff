@@ -7,11 +7,11 @@ gem 'sinatra-mongoid', :require => 'sinatra/mongoid'
 gem 'haml'
 
 group :development do
-  gem 'cucumber-sinatra'
   gem 'heroku'
 end
 
 group :test do
+  gem 'rack-test'
   gem 'cucumber'
   gem 'capybara'
   gem 'rspec'

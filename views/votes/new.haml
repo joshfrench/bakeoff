@@ -1,0 +1,9 @@
+%h1 Vote now
+
+%form{:action => "/vote", :method => "post"}
+  .taste
+    %ul
+      = list_of @entries do |entry|
+        %label{:for => "ballot[taste][#{entry.name}]"}= entry.name
+        %input{:type => 'text', :name => "ballot[taste][#{entry.name}]", :id => "ballot[taste][#{entry.name}]", :size => 2}
+  %input{:type => "submit", :value => "Vote!"}

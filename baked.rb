@@ -1,6 +1,7 @@
 require 'sinatra/base'
 require 'uri'
 require './lib/entry'
+require './lib/ballot'
 
 
 class Baked < Sinatra::Base
@@ -26,5 +27,17 @@ class Baked < Sinatra::Base
       entry.destroy
     end
     redirect "/entries"
+  end
+
+  get '/vote' do
+    @entries = Entry.all
+    @ballot = Ballot.new
+    haml :'votes/new'
+  end
+
+  post '/vote' do
+    @ballot = Ballot.from_hash(params[:ballot])
+    @ballot.save
+    "Thanks!"
   end
 end

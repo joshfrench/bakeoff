@@ -28,11 +28,8 @@ GEM
       gherkin (~> 2.3.2)
       json (~> 1.4.6)
       term-ansicolor (~> 1.0.5)
-    cucumber-sinatra (0.3.0)
-      templater (>= 1.0.0)
     culerity (0.2.12)
     diff-lcs (1.1.2)
-    extlib (0.9.15)
     factory_girl (1.3.2)
     ffi (0.6.3)
       rake (>= 0.8.7)
@@ -44,7 +41,6 @@ GEM
       json_pure (>= 1.2.0, < 1.5.0)
       launchy (~> 0.3.2)
       rest-client (>= 1.4.0, < 1.7.0)
-    highline (1.6.1)
     i18n (0.5.0)
     json (1.4.6)
     json_pure (1.4.6)
@@ -88,10 +84,6 @@ GEM
       mongo_ext
       mongoid
       sinatra
-    templater (1.0.0)
-      diff-lcs (>= 1.1.2)
-      extlib (>= 0.9.5)
-      highline (>= 1.4.0)
     term-ansicolor (1.0.5)
     tilt (1.1)
     tzinfo (0.3.23)
@@ -106,11 +98,11 @@ DEPENDENCIES
   bson_ext
   capybara
   cucumber
-  cucumber-sinatra
   factory_girl
   haml
   heroku
   mongoid (~> 2.0.0.beta)
+  rack-test
   rspec
   sinatra
   sinatra-mongoid
