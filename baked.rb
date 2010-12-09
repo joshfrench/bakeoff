@@ -39,6 +39,6 @@ class Baked < Sinatra::Base
     @ballot = Ballot.find_or_create_by(:ip => request.ip)
     @ballot.from_hash(params[:ballot])
     @ballot.save
-    "Thanks!"
+    redirect '/vote'
   end
 end

@@ -22,7 +22,8 @@ Feature: Submitting a ballot
     And I fill in "Muffins" with "1" within ".taste"
     And I fill in "Brownies" with "2" within ".taste"
     And I press "Vote!"
-    Then I should see "Thanks!"
+    Then I should be on the new ballot page
+    And I should see "Update your vote"
 
   Scenario: Revising an existing vote
     Given a ballot exists

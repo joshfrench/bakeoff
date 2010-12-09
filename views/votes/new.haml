@@ -1,5 +1,7 @@
 %h1 Vote now
 
+%h2= @ballot.new_record? ? 'Submit your vote' : 'Update your vote'
+
 %form{:action => "/vote", :method => "post"}
   .taste
     %ul
