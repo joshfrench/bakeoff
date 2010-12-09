@@ -10,6 +10,7 @@ class Ballot
 
   def from_hash(hash)
     hash.each_pair do |category,votes|
+      self[category] = []
       votes.each_pair do |entry,rank|
         self[category][rank.to_i] = entry
       end
