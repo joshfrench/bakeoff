@@ -31,12 +31,13 @@ class Baked < Sinatra::Base
 
   get '/vote' do
     @entries = Entry.all
-    @ballot = Ballot.new
+    @ballot = Ballot.find_or_initialize_by(:ip => request.ip)
     haml :'votes/new'
   end
 
   post '/vote' do
-    @ballot = Ballot.from_hash(params[:ballot])
+    @ballot = Ballot.find_or_create_by(:ip => request.ip)
+    @ballot.from_hash(params[:ballot])
     @ballot.save
     "Thanks!"
   end

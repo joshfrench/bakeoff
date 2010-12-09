@@ -11,6 +11,7 @@ group :development do
 end
 
 group :test do
+  gem 'ruby-debug19'
   gem 'rack-test'
   gem 'cucumber'
   gem 'capybara'

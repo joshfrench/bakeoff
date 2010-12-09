@@ -5,5 +5,5 @@
     %ul
       = list_of @entries do |entry|
         %label{:for => "ballot[taste][#{entry.name}]"}= entry.name
-        %input{:type => 'text', :name => "ballot[taste][#{entry.name}]", :id => "ballot[taste][#{entry.name}]", :size => 2}
+        %input{:type => 'text', :name => "ballot[taste][#{entry.name}]", :id => "ballot[taste][#{entry.name}]", :size => 2, :value => @ballot[:taste].index(entry.name)}
   %input{:type => "submit", :value => "Vote!"}

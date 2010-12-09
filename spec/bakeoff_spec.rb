@@ -6,6 +6,7 @@ describe Baked do
   describe "POST /vote" do
     it "should create a new ballot" do
       post "/vote", :ballot => {:taste => { "Cookies" => "0", "Muffins" => "2", "Brownies" => "1"}}
+      Ballot.count.should == 1
       ballot = Ballot.first
       ballot.taste.should == %w(Cookies Brownies Muffins)
     end

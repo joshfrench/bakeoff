@@ -4,10 +4,11 @@ require 'sinatra'
 require 'rack/test'
 require 'mongoid'
 require 'factory_girl'
+require 'ruby-debug'
 
 RSpec.configure do |config|
   config.mock_with :rspec
-  config.after :suite do
+  config.before :suite do
     Mongoid.master.collections.select{|c| c.name !~ /system/}.each(&:drop)
   end
 end
