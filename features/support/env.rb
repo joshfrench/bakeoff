@@ -2,12 +2,12 @@
 
 ENV['RACK_ENV'] = 'test'
 
-require File.join(File.dirname(__FILE__), '..', '..', 'baked.rb')
-
 require 'capybara'
 require 'capybara/cucumber'
 require 'rspec'
 require 'mongoid'
+
+require File.join(File.dirname(__FILE__), '..', '..', 'baked.rb')
 
 Mongoid.configure do |config|
   host = ENV['MONGOID_HOST']     || 'localhost'
