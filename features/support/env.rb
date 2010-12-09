@@ -6,8 +6,10 @@ require 'capybara'
 require 'capybara/cucumber'
 require 'rspec'
 require 'mongoid'
+require 'factory_girl'
 
-require File.join(File.dirname(__FILE__), '..', '..', 'baked.rb')
+$: << File.join(File.dirname(__FILE__), %w(.. .. lib))
+$: << File.join(File.dirname(__FILE__), %w(.. .. lib rubyvote lib))
 
 Mongoid.configure do |config|
   host = ENV['MONGOID_HOST']     || 'localhost'
@@ -16,8 +18,9 @@ Mongoid.configure do |config|
   config.master = Mongo::Connection.new(host, port).db(name)
 end
 
-require 'factory_girl'
 Dir[File.expand_path(File.join(File.dirname(__FILE__),%w(.. .. spec factories *.rb)))].each {|f| require f}
+
+require File.join(File.dirname(__FILE__), %w(.. .. baked))
 
 Capybara.app = Baked
 

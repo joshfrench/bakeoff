@@ -1,7 +1,7 @@
 require 'sinatra/base'
 require 'uri'
-require './lib/entry'
-require './lib/ballot'
+require 'entry'
+require 'ballot'
 
 
 class Baked < Sinatra::Base

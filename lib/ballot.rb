@@ -1,3 +1,5 @@
+require 'runoff'
+
 class Ballot
   include Mongoid::Document
   field :ip
