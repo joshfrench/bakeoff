@@ -1,0 +1,19 @@
+%h1 Entries
+
+%ul
+  = list_of @entries do |entry|
+    = entry.name
+    %form{:action => "/entries/#{entry.id}", :method => "post"}
+      %input{:type => "hidden", :name => "_method", :value => "delete"}
+      %input{:type => "submit", :value => "Remove"}
+
+- if @entry && @entry.errors.any?
+  %ul.errors
+    = list_of @entry.errors.to_a do |error|
+      = error
+
+%p
+  %form{:action => "/entries", :method => "post"}
+    %label{:for => "entry_name"} New Entry
+    %input{:type => "text", :name=>"entry[name]", :id=>"entry_name"}
+    %input{:type => "submit", :value => "Add Entry"}
