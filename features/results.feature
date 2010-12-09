@@ -10,10 +10,15 @@ Feature: Tabulating results
       |Brownies|
       |Muffins |
     And I have the following ballots:
-      |ip       |taste                     |
-      |127.0.0.1|Cookies, Brownies, Muffins|
-      |127.0.0.2|Cookies, Muffins, Brownies|
+      |ip       |taste                     |creativity                |
+      |127.0.0.1|Cookies, Brownies, Muffins|Cookies, Muffins, Brownies|
+      |127.0.0.2|Cookies, Muffins, Brownies|Muffins, Cookies, Brownies|
+      |127.0.0.3|Cookies, Muffins, Brownies|Muffins, Cookies, Brownies|
   
-  Scenario: Viewing the winners
+  Scenario: Viewing the overall results
+    
+      
+  Scenario: Viewing category winners
     When I go to the results page
-    Then I should see "Cookies" within ".taste"
+    Then I should see "Cookies Muffins Brownies" within ".taste"
+    And I should see "Muffins Cookies Brownies" within ".creativity"

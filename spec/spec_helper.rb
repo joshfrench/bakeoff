@@ -18,7 +18,7 @@ require File.join(File.dirname(__FILE__), '..', 'baked.rb')
 
 RSpec.configure do |config|
   config.mock_with :rspec
-  config.after :all do
+  config.before :all do
     Mongoid.master.collections.select{|c| c.name !~ /system/}.each(&:drop)
   end
 end

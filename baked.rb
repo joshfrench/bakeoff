@@ -41,4 +41,11 @@ class Baked < Sinatra::Base
     @ballot.save
     redirect '/vote'
   end
+
+  get '/results' do
+    @overall = Ballot.overall
+    @taste = Ballot.category(:taste)
+    @creativity = Ballot.category(:creativity)
+    haml :'results/index'
+  end
 end

@@ -16,4 +16,24 @@ describe Ballot do
       ballot.taste.should == %w(C B A)
     end
   end
+
+  describe ".overall" do
+    it "should show the overall winners" do
+      Factory(:ballot, :taste => %w(Cookies Muffins Brownies))
+      Factory(:ballot, :taste => %w(Cookies Muffins Brownies))
+      Factory(:ballot, :presentation => %w(Muffins Cookies Brownies), :taste => [])
+      Factory(:ballot, :creativity => %w(Muffins Cookies Brownies), :taste => [])
+      Factory(:ballot, :creativity => %w(Muffins Brownies Cookies), :taste => [])
+      Ballot.overall.should eql %w(Muffins Cookies Brownies)
+    end
+  end
+
+  describe ".category" do
+    it "should return a set of results scoped by category" do
+      Factory(:ballot, :taste => %w(Cookies Muffins Brownies))
+      Factory(:ballot, :taste => %w(Cookies Muffins Brownies))
+      Factory(:ballot, :taste => %w(Cookies Brownies Muffins))
+      Ballot.category(:taste).should eql %w(Cookies Muffins Brownies)
+    end
+  end
 end

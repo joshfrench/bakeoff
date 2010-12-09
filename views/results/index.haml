@@ -1,0 +1,17 @@
+.overall
+  %h2 Overall results:
+  %ol
+    = list_of @overall do |entry|
+      = entry
+
+.taste
+  %h2 Results, taste category:
+  %ol
+    = list_of @taste do |entry|
+      = entry
+
+.creativity
+  %h2 Results, creativity category:
+  %ol
+    = list_of @creativity do |entry|
+      = entry
