@@ -25,6 +25,9 @@ module NavigationHelpers
     when /the new ballot page/
       '/vote'
 
+    when /the results page/
+      '/results'
+
     else
       raise "Can't find mapping from \"#{page_name}\" to a path.\n" +
         "Now, go and add a mapping in #{__FILE__}"
