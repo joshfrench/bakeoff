@@ -22,6 +22,9 @@ module NavigationHelpers
     when /the entries index/
       '/entries'
 
+    when /the new entries page/
+      '/entries/new'
+
     when /the new ballot page/
       '/vote'
 

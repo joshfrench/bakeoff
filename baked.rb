@@ -12,10 +12,19 @@ class Baked < Sinatra::Base
     haml :'entries/index'
   end
 
+  get '/entries/new' do
+    haml :'entries/new'
+  end
+
+  get "/entries/:id" do
+    @entry = Entry.find(params[:id])
+    haml :'entries/show'
+  end
+
   post '/entries' do
     @entry = Entry.new(params[:entry])
     if @entry.save
-      redirect '/entries'
+      redirect "/entries/#{@entry.id}"
     else
       @entries = Entry.all
       haml :'entries/index'

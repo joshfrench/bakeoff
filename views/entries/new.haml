@@ -1,0 +1,7 @@
+%h1 Add a new entry:
+
+%p
+  %form{:action => "/entries", :method => "post"}
+    %label{:for => "entry_name"} New Entry
+    %input{:type => "text", :name=>"entry[name]", :id=>"entry_name"}
+    %input{:type => "submit", :value => "Add Entry"}

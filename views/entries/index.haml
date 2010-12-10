@@ -12,8 +12,3 @@
     = list_of @entry.errors.to_a do |error|
       = error
 
-%p
-  %form{:action => "/entries", :method => "post"}
-    %label{:for => "entry_name"} New Entry
-    %input{:type => "text", :name=>"entry[name]", :id=>"entry_name"}
-    %input{:type => "submit", :value => "Add Entry"}
