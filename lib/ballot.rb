@@ -3,6 +3,7 @@ require 'runoff'
 class Ballot
   include Mongoid::Document
   field :ip
+  field :name
   field :taste, :type => Array, :default => []
   field :presentation, :type => Array, :default => []
   field :creativity, :type => Array, :default => []
@@ -11,6 +12,7 @@ class Ballot
   validates_uniqueness_of :ip, :case_sensitive => false
 
   def from_hash(hash)
+    self.name = hash.delete('name')
     hash.each_pair do |category,votes|
       self[category] = []
       votes.each_pair do |entry,rank|

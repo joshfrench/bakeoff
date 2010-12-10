@@ -5,7 +5,7 @@ describe Ballot do
 
   describe "#from_hash" do
     it "should order hash keys" do
-      ballot = Ballot.new.from_hash :taste => {'Alpha' => '0', 'Gamma' => '2', 'Beta' => "1"}
+      ballot = Ballot.new.from_hash 'name' => 'Josh', 'taste' => {'Alpha' => '0', 'Gamma' => '2', 'Beta' => "1"}
       ballot.taste.should == %w(Alpha Beta Gamma)
     end
 

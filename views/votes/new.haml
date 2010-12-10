@@ -1,8 +1,14 @@
 %h1 Vote now
 
-%h2= @ballot.new_record? ? 'Submit your vote' : 'Update your vote'
-
 %form{:action => "/vote", :method => "post"}
+  - if @ballot.new_record?
+    %label{:for => "ballot_name"} Your name:
+    %input{:type => "text", :name => "ballot[name]", :id => "ballot_name"}
+    @digitalpulp.com
+    %h2 Submit your vote:
+  - else
+    %h2= "Welcome back, #{@ballot.name}. You may update your vote:"
+
   .taste
     %ul
       = list_of @entries do |entry|
