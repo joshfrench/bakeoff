@@ -6,7 +6,6 @@ gem 'bson_ext'
 gem 'sinatra-mongoid', :require => 'sinatra/mongoid'
 gem 'haml'
 gem 'carrierwave'
-gem 'rack-gridfs', :require => 'rack/gridfs'
 
 group :development do
   gem 'heroku'

@@ -64,9 +64,6 @@ GEM
       will_paginate (~> 3.0.pre)
     nokogiri (1.4.4)
     rack (1.2.1)
-    rack-gridfs (0.3.0)
-      mongo (>= 0.20.1)
-      rack
     rack-test (0.5.6)
       rack (>= 1.0)
     rake (0.8.7)
@@ -122,7 +119,6 @@ DEPENDENCIES
   haml
   heroku
   mongoid (~> 2.0.0.beta)
-  rack-gridfs
   rack-test
   rspec
   ruby-debug19

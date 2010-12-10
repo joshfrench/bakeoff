@@ -6,10 +6,6 @@ require 'ballot'
 
 class Baked < Sinatra::Base
   use Rack::MethodOverride
-  use Rack::GridFS, :hostname => Mongoid.database.connection.primary_pool.host,
-                    :port => Mongoid.database.connection.primary_pool.port,
-                    :database => Mongoid.database.name, :prefix => 'gridfs'
-  BSON::ObjectID = BSON::ObjectId
 
   get '/entries' do
     @entries = Entry.all
@@ -60,6 +56,14 @@ class Baked < Sinatra::Base
     @taste = Ballot.category(:taste)
     @creativity = Ballot.category(:creativity)
     haml :'results/index'
+  end
+
+  get '/gridfs/:id/:filename' do
+    img = params[:id] + '/' + params[:filename]
+    fs = Mongo::GridFileSystem.new(Mongoid.database)
+    file = fs.open(img, 'r')
+    content_type file.content_type
+    file.read
   end
 
   error Mongoid::Errors::DocumentNotFound do

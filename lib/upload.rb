@@ -1,14 +1,6 @@
 class Upload < CarrierWave::Uploader::Base
   def store_dir
-    'gridfs'
-  end
-
-  def filename
-    model.id.to_s
-  end
-
-  def cache_dir
-    ENV['TMPDIR'] || File.join(File.dirname(__FILE__), 'tmp')
+    "#{model.id}"
   end
 
   def extension_whitelist

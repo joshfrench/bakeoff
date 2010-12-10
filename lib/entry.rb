@@ -1,7 +1,6 @@
 require 'upload'
 
 class Entry
-  require 'carrierwave/orm/mongoid'
   include Mongoid::Document
   field :name
   mount_uploader :image, Upload
