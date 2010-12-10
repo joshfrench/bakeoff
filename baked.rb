@@ -6,6 +6,10 @@ require 'ballot'
 
 class Baked < Sinatra::Base
   use Rack::MethodOverride
+  use Rack::GridFS, :hostname => Mongoid.database.connection.primary_pool.host,
+                    :port => Mongoid.database.connection.primary_pool.port,
+                    :database => Mongoid.database.name, :prefix => 'gridfs'
+  BSON::ObjectID = BSON::ObjectId
 
   get '/entries' do
     @entries = Entry.all

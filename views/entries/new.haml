@@ -1,7 +1,8 @@
 %h1 Add a new entry:
 
 %p
-  %form{:action => "/entries", :method => "post"}
+  %form{:action => "/entries", :method => "post", :enctype=>"multipart/form-data"}
     %label{:for => "entry_name"} New Entry
-    %input{:type => "text", :name=>"entry[name]", :id=>"entry_name"}
+    %input{:type => "text", :name=> "entry[name]", :id=>"entry_name"}
+    %input{:type => "file", :name => "entry[image]"}
     %input{:type => "submit", :value => "Add Entry"}
