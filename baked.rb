@@ -57,4 +57,8 @@ class Baked < Sinatra::Base
     @creativity = Ballot.category(:creativity)
     haml :'results/index'
   end
+
+  error Mongoid::Errors::DocumentNotFound do
+    raise NotFound
+  end
 end
