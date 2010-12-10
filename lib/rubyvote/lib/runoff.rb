@@ -70,7 +70,7 @@ class InstantRunoffResult < ElectionResult
   def runoff(votes, loser)
     votes.each_pair do |candidate, morevotes|
       hash = morevotes[1]
-      hash.dup.each_pair do |vote, count|
+      hash.each_pair do |vote, count|
         hash.delete(vote)
         vote.delete(loser)
         hash[vote] = count

@@ -6,13 +6,14 @@ gem 'bson_ext'
 gem 'sinatra-mongoid', :require => 'sinatra/mongoid'
 gem 'haml'
 gem 'carrierwave'
+gem 'rmagick'
 
 group :development do
   gem 'heroku'
 end
 
 group :test do
-  gem 'ruby-debug19'
+  gem 'ruby-debug'
   gem 'rack-test'
   gem 'cucumber'
   gem 'capybara'

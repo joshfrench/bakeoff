@@ -26,7 +26,9 @@ class Ballot
   end
 
   def self.overall
-    ballots = [*self.all.map(&:taste), *self.all.map(&:creativity), *self.all.map(&:presentation)]
+    ballots = self.all.map(&:taste)
+    ballots.concat self.all.map(&:creativity) 
+    ballots.concat self.all.map(&:presentation)
     self.rankings(ballots)
   end
 
