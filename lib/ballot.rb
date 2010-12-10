@@ -35,7 +35,8 @@ class Ballot
     def self.rankings(ballots)
       ballots.reject! &:empty?
       winners = []
-      ballots.flatten.uniq.size.times do
+      return winners if ballots.compact.empty?
+      3.times do
         ballots.each { |b| b.delete winners.last }
         winners << InstantRunoffVote.new(ballots).result.winner
       end
