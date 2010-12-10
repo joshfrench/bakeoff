@@ -10,8 +10,17 @@
     %h2= "Welcome back, #{@ballot.name}. You may update your vote:"
 
   .taste
-    %ul
+    %ul#sortable
       = list_of @entries do |entry|
         %label{:for => "ballot[taste][#{entry.name}]"}= entry.name
         %input{:type => 'text', :name => "ballot[taste][#{entry.name}]", :id => "ballot[taste][#{entry.name}]", :size => 2, :value => @ballot[:taste].index(entry.name)}
   %input{:type => "submit", :value => "Vote!"}
+
+:javascript
+  $('#sortable').sortable({
+    update: function(event, ui) {
+      $(ui.item[0]).parent().children().each(function(index,child) {
+        $(child).children('input').val(index);
+      })
+    }
+  });

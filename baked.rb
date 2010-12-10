@@ -5,6 +5,7 @@ require 'ballot'
 
 
 class Baked < Sinatra::Base
+  set :public, File.dirname(__FILE__) + '/public'
   use Rack::MethodOverride
 
   get '/entries' do
