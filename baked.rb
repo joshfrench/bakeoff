@@ -63,10 +63,15 @@ class Baked < Sinatra::Base
     fs = Mongo::GridFileSystem.new(Mongoid.database)
     file = fs.open(img, 'r')
     content_type file.content_type
+    headers 'Content-Length' => file.file_length.to_s
     file.read
   end
 
   error Mongoid::Errors::DocumentNotFound do
+    raise NotFound
+  end
+
+  error Mongo::GridFileNotFound do
     raise NotFound
   end
 end
