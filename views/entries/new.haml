@@ -1,5 +1,10 @@
 %h1 Add a new entry:
 
+- if @entry.errors.any?
+  %ul.errors
+    = list_of @entry.errors.to_a do |error|
+      = error
+
 %p
   %form{:action => "/entries", :method => "post", :enctype=>"multipart/form-data"}
     %label{:for => "entry_name"} New Entry

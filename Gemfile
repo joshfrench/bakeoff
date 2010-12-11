@@ -10,6 +10,7 @@ gem 'rmagick'
 
 group :development do
   gem 'heroku'
+  gem 'ruby-debug'
 end
 
 group :test do

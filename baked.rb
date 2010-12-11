@@ -22,22 +22,13 @@ class Baked < Sinatra::Base
     if @entry.save
       redirect "/entries/#{@entry.id}"
     else
-      @entries = Entry.all
-      haml :'entries/index'
+      haml :'entries/new'
     end
   end
 
-  get '/vote' do
-    @entries = Entry.all
-    @ballot = Ballot.find_or_initialize_by(:ip => request.ip)
-    haml :'votes/new'
-  end
-
-  post '/vote' do
-    @ballot = Ballot.find_or_create_by(:ip => request.ip)
-    @ballot.from_hash(params[:ballot])
-    @ballot.save
-    redirect '/vote'
+  get "/entries/:id" do
+    @entry = Entry.find(params[:id])
+    haml :'entries/show'
   end
 
   get '/results' do

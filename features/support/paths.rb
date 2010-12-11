@@ -22,7 +22,7 @@ module NavigationHelpers
     when /the entries index/
       '/entries'
 
-    when /the new entries page/
+    when /the new entry page/
       '/entries/new'
 
     when /the new ballot page/

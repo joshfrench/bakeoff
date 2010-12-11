@@ -4,7 +4,7 @@ Feature: Adding new entries
   So I can get in on this thing
 
   Background:
-    Given I am on the new entries page
+    Given I am on the new entry page
 
   Scenario: Adding an entry
     When I add an entry named "Ruby scones"
@@ -13,7 +13,6 @@ Feature: Adding new entries
 
   Scenario: Adding an invalid entry
     When I add an entry named ""
-    Then I should be on the entries index
     Then I should see "Name can't be blank"
 
   Scenario: Adding a duplicate entry
@@ -21,5 +20,4 @@ Feature: Adding new entries
       |name    |
       |Brownies|
     When I add an entry named "Brownies"
-    Then I should be on the entries index
     Then I should see "Name is already taken"
