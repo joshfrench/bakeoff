@@ -1,24 +1,21 @@
-%h1.yellow Vote now
+%h1.yellow Cast your ballot
 
-%p To place your vote, simply drag the entries into the order you think they should be in. Your favorite goes at the top, everything else follows in descending order of preference. Don't forget to hit <i>Vote!</i> when you're done.
+%form#vote{:action => "/vote", :method => "post"}
+  %ol
+    %li
+      %input{:type => "text", :name => "ballot[name]", :id => "ballot_name", :value => 'Enter your name'}
+      @digitalpulp.com
+      %p.small Ballots will be kept anonymous. There is no fancy user validation, so please play nicely.
+    %li
+      Rate entries in each category.
+      %p.small Categories are taste, presentation/appearance, and creativity (interpretation of theme).
+    %li
+      When you're done, hit 
+      %span.cyan Vote!
+      %p.small Winners will be announced in the conference room at 5pm.
 
-%p You can come back later and update this if you change your mind. Voting ends at 4:30pm.
+  %input.button{:type => 'submit', :value => 'Vote!'}
 
-%form{:action => "/vote", :method => "post"}
-  - if @ballot.new_record?
-    %label{:for => "ballot_name"} Your name:
-    %input{:type => "text", :name => "ballot[name]", :id => "ballot_name"}
-    @digitalpulp.com
-    %h2 Submit your vote:
-  - else
-    %h2= "Welcome back, #{@ballot.name}. You may update your vote:"
-
-  .taste
-    %ul#sortable
-      = list_of @entries do |entry|
-        %label{:for => "ballot_taste_#{entry.name}"}= entry.name
-        %input{:type => 'text', :name => "ballot[taste][#{entry.name}]", :id => "ballot_taste_#{entry.name}", :size => 2, :value => @ballot[:taste].index(entry.name)}
-  %input{:type => "submit", :value => "Vote!"}
 
 %script{:type => 'text/javascript', :src => '/js/jquery-ui-1.8.7.custom.min.js'}
 :javascript
@@ -29,5 +26,13 @@
           $(child).children('input').val(index);
         })
       }
+    });
+    $('#ballot_name').focus(function() {
+      if ($(this).val() == 'Enter your name')
+        $(this).val('');
+    });
+    $('#ballot_name').blur(function() {
+      if ($(this).val().trim() == '')
+        $(this).val('Enter your name');
     });
   })
