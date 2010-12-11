@@ -33,7 +33,7 @@ Feature: Submitting a ballot
     When I fill in "ballot_name" with "User 1"
     And I press "Vote!"
     Then there should be 1 Ballot
-    And I should see "already have a ballot"
+    And I should see "I already have a vote from user 1@digitalpulp.com"
 
   Scenario: Trying to vote again
     Given a ballot exists

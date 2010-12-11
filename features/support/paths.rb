@@ -25,6 +25,9 @@ module NavigationHelpers
     when /the new entry page/
       '/entries/new'
 
+    when /the "([^"]*)" entry page/
+     "/entries/#{Entry.first(:conditions => {:name => $1}).id}" 
+
     when /the ballot page/
       '/vote'
 
