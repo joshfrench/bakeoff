@@ -25,8 +25,11 @@ module NavigationHelpers
     when /the new entry page/
       '/entries/new'
 
-    when /the new ballot page/
+    when /the ballot page/
       '/vote'
+
+    when /the thanks page/
+      '/thanks'
 
     when /the results page/
       '/results'

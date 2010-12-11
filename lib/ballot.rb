@@ -9,10 +9,11 @@ class Ballot
   field :creativity, :type => Array, :default => []
 
   validates_presence_of :ip
-  validates_uniqueness_of :ip, :case_sensitive => false
+  validates_presence_of :name
+  validates_uniqueness_of :name, :case_sensitive => false
 
   def from_hash(hash)
-    self.name = hash.delete('name')
+    self.name = hash.delete('name').downcase
     hash.each_pair do |category,votes|
       self[category] = []
       votes.each_pair do |entry,rank|
@@ -20,6 +21,10 @@ class Ballot
       end
     end
     self
+  end
+
+  def self.find_or_initialize_by_name(name)
+    self.find_or_initialize_by(:name => name.downcase)
   end
 
   def self.category(category)

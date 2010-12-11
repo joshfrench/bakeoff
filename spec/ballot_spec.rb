@@ -3,6 +3,15 @@ require File.join(File.dirname(__FILE__), 'spec_helper')
 describe Ballot do
   include Rack::Test::Methods
 
+  describe ".find_or_initialize_by_name" do
+    it "should be case insensitive" do
+      ballot = Factory(:ballot, :name => 'josh')
+      new = Ballot.find_or_initialize_by_name('Josh')
+      new.should == ballot
+    end
+  end
+
+
   describe "#from_hash" do
     it "should order hash keys" do
       ballot = Ballot.new.from_hash 'name' => 'Josh', 'taste' => {'Alpha' => '0', 'Gamma' => '2', 'Beta' => "1"}
@@ -12,18 +21,19 @@ describe Ballot do
     it "should overwrite existing values" do
       ballot = Ballot.new
       ballot.taste = %w(A B C D)
-      ballot.from_hash :taste => {'A' => 2, 'C' => 0, 'B' => 1}
+      ballot.from_hash 'name' => 'Josh', 'taste' => {'A' => 2, 'C' => 0, 'B' => 1}
       ballot.taste.should == %w(C B A)
     end
   end
 
   describe ".overall" do
     it "should show the overall winners" do
-      Factory(:ballot, :taste => %w(Cookies Muffins Brownies))
-      Factory(:ballot, :taste => %w(Cookies Muffins Brownies))
-      Factory(:ballot, :presentation => %w(Muffins Cookies Brownies), :taste => [])
-      Factory(:ballot, :creativity => %w(Muffins Cookies Brownies), :taste => [])
-      Factory(:ballot, :creativity => %w(Muffins Brownies Cookies), :taste => [])
+      Ballot.destroy_all
+      Factory(:ballot, 'taste' => %w(Cookies Muffins Brownies))
+      Factory(:ballot, 'taste' => %w(Cookies Muffins Brownies))
+      Factory(:ballot, 'presentation' => %w(Muffins Cookies Brownies), :taste => [])
+      Factory(:ballot, 'creativity' => %w(Muffins Cookies Brownies), :taste => [])
+      Factory(:ballot, 'creativity' => %w(Muffins Brownies Cookies), :taste => [])
       Ballot.overall.should eql %w(Muffins Cookies Brownies)
     end
   end

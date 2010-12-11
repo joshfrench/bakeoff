@@ -10,26 +10,32 @@ Feature: Submitting a ballot
       |Muffins |
       |Cookies |
 
-  Scenario: Viewing the entries
-    Given I am on the new ballot page
+  Scenario: Filling out a new ballot
+    Given I am on the ballot page
     Then I should see "Brownies" within ".taste"
     And I should see "Muffins" within ".taste"
     And I should see "Cookies" within ".taste"
 
   Scenario: Submitting a new vote
-    Given I am on the new ballot page
-    When I fill in "Your name:" with "Josh"
+    Given I am on the ballot page
+    And there are no ballots
+    When I fill in "ballot_name" with "Josh"
     And I fill in "Cookies" with "0" within ".taste"
     And I fill in "Muffins" with "1" within ".taste"
     And I fill in "Brownies" with "2" within ".taste"
     And I press "Vote!"
-    Then I should be on the new ballot page
-    And I should see "update your vote"
+    Then I should be on the ballot page
+    And I should see "Thanks"
 
-  Scenario: Revising an existing vote
+  Scenario: Submitting a duplicate ballot
+    Given I am on the ballot page
+    And a ballot exists
+    When I fill in "ballot_name" with "User 1"
+    And I press "Vote!"
+    Then there should be 1 Ballot
+    And I should see "already have a ballot"
+
+  Scenario: Trying to vote again
     Given a ballot exists
-    When I go to the new ballot page
-    Then I should see "Welcome back, Josh"
-    And the "Cookies" field within ".taste" should contain "0"
-    And the "Muffins" field within ".taste" should contain "1"
-    And the "Brownies" field within ".taste" should contain "2"
+    When I go to the ballot page
+    Then I should see "Thanks for voting"
