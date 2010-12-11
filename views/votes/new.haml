@@ -12,8 +12,8 @@
   .taste
     %ul#sortable
       = list_of @entries do |entry|
-        %label{:for => "ballot[taste][#{entry.name}]"}= entry.name
-        %input{:type => 'text', :name => "ballot[taste][#{entry.name}]", :id => "ballot[taste][#{entry.name}]", :size => 2, :value => @ballot[:taste].index(entry.name)}
+        %label{:for => "ballot_taste_#{entry.name}"}= entry.name
+        %input{:type => 'text', :name => "ballot[taste][#{entry.name}]", :id => "ballot_taste_#{entry.name}", :size => 2, :value => @ballot[:taste].index(entry.name)}
   %input{:type => "submit", :value => "Vote!"}
 
 :javascript
