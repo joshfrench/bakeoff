@@ -1,13 +1,24 @@
-%h1 Add a new entry:
+%h1.yellow Submit your entry
 
 - if @entry.errors.any?
-  %ul.errors
-    = list_of @entry.errors.to_a do |error|
-      = error
+  .error
+    %h3== Oops! The name #{@entry.errors.first[1]}. 
 
 %p
-  %form{:action => "/entries", :method => "post", :enctype=>"multipart/form-data"}
-    %label{:for => "entry_name"} New Entry
-    %input{:type => "text", :name=> "entry[name]", :id=>"entry_name"}
-    %input{:type => "file", :name => "entry[image]"}
-    %input{:type => "submit", :value => "Add Entry"}
+  %form#entry{:action => "/entries", :method => "post", :enctype=>"multipart/form-data"}
+    .row
+      %label{:for => "entry_name"} Name of dish:
+      %input{:type => "text", :name=> "entry[name]", :id=>"entry_name"}
+    .row
+      %label{:for => "file"} Add an image:
+      %input{:type => "file", :name => "entry[image]", :id => "entry_image"}
+    .buttons
+      %input.button{:type => "submit", :value => "Add Entry"}
+
+:javascript
+  $(function() {
+    $('#entry').submit(function() {
+      if (!$('#entry_image').val())
+        return confirm("Are you sure you don't want to add an image? It will help people remember what they're voting for.");
+    });
+  })
