@@ -6,6 +6,15 @@ $cyan: #48B3E6
 $magenta: #DD009A
 $yellow: #F2F23F
 
+@import "_buttons"
+
+@mixin width
+  margin: 0 auto
+  padding: 14px 22px
+  width: 800px
+  background-image: none
+  text-align: center
+
 html
   font:
     family: 'Droid Serif', Arial, sans-serif
@@ -16,32 +25,44 @@ html
   background-image: url("/img/bg.png")
 
 .main
-  margin: 0 auto
-  padding: 14px 22px
-  width: 800px
+  +width
   background-color: $light-grey
-  background-image: none
+  min-height: 300px
 
-h1
+h1, h2
   font:
     family: "Droid Sans", Arial, sans-serif
-    size: 36px
     weight: bold
+  text-shadow: $dark-grey 1px 1px 2px
+
+h1
+  font-size: 36px
   padding: 14px 0
   text-transform: uppercase
-  text-shadow: $dark-grey 1px 1px 1px
 
 h1.header
-  @extend .main
-  text-align: center
-  padding: 14px 22px
+  +width
   background-color: $magenta
   font-size: 22px
   color: $white
   letter-spacing: 1px
 
+h2
+  font-size: 22px
+  padding: 9px 0
+
 p
   padding-bottom: 9px
+
+a
+  color: $cyan
+
+.buttons
+  margin-top: 14px
+
+.button
+  +button
+  +color($cyan)
 
 .cyan
   color: $cyan

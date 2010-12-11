@@ -1,7 +1,7 @@
-%h1.cyan Log In
-%form{:action => '/login', :method => 'post'}
-  %input{:type => 'text', :name => 'name', :id => 'name'}
-  @digitalpulp.com
-  %br/
-  %input{:type => 'submit', :value => 'Log in'}
-%p.small Please note there is no user validation of any kind. Kindly refrain from abusing this, thank you.
+%h1.cyan Welcome to the 2010 DP Bake-Off!
+
+.intro
+  %h2.yellow I need to...
+  .buttons
+    %a.button{:href => '/entries/new', :alt => "Add an entry"}Add an entry
+    %a.button{:href => '/vote', :alt => 'Vote'}Vote for stuff
