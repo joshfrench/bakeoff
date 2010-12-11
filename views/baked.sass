@@ -1,40 +1,53 @@
 $white: #FFFFFF
 $black: #000000
-$grey: #555555
+$light-grey: #F5F5F5
+$dark-grey: #555555
 $cyan: #48B3E6
 $magenta: #DD009A
 $yellow: #F2F23F
 
 html
   font:
-    family: Arial, sans-serif
-    size: 12px
-    line-height: 18px
-    color: $grey
+    family: 'Droid Serif', Arial, sans-serif
+    size: 14px
+    weight: normal
+  line-height: 20px
+  color: $dark-grey
   background-image: url("/img/bg.png")
-
-body
-  height: 100%
 
 .main
   margin: 0 auto
-  padding: 0 22px 14px
-  width: 600px
-  background-color: $white
+  padding: 14px 22px
+  width: 800px
+  background-color: $light-grey
   background-image: none
 
 h1
   font:
+    family: "Droid Sans", Arial, sans-serif
     size: 36px
     weight: bold
-  padding-bottom: 9px
+  padding: 14px 0
   text-transform: uppercase
+  text-shadow: $dark-grey 1px 1px 1px
 
 h1.header
   @extend .main
+  text-align: center
   padding: 14px 22px
-  background-color: $black
-  color: $grey
-  font:
-    size: 22px
-    weight: normal
+  background-color: $magenta
+  font-size: 22px
+  color: $white
+  letter-spacing: 1px
+
+p
+  padding-bottom: 9px
+
+.cyan
+  color: $cyan
+
+.yellow
+  color: $yellow
+
+.magenta
+  color: $magenta

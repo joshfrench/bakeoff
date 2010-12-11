@@ -1,4 +1,8 @@
-%h1 Vote now
+%h1.yellow Vote now
+
+%p To place your vote, simply drag the entries into the order you think they should be in. Your favorite goes at the top, everything else follows in descending order of preference. Don't forget to hit <i>Vote!</i> when you're done.
+
+%p You can come back later and update this if you change your mind. Voting ends at 4:30pm.
 
 %form{:action => "/vote", :method => "post"}
   - if @ballot.new_record?
