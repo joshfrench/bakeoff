@@ -10,13 +10,3 @@
     %h1.header Digital Pulp Holiday Bake-Off 2010
     .main
       = yield
-    %script{:type => 'text/javascript', :src => 'https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js'}
-    %script{:type => 'text/javascript', :src => '/js/jquery-ui-1.8.7.custom.min.js'}
-    :javascript
-      $('#sortable').sortable({
-        update: function(event, ui) {
-          $(ui.item[0]).parent().children().each(function(index,child) {
-            $(child).children('input').val(index);
-          })
-        }
-      });

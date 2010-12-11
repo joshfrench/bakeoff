@@ -20,3 +20,14 @@
         %input{:type => 'text', :name => "ballot[taste][#{entry.name}]", :id => "ballot_taste_#{entry.name}", :size => 2, :value => @ballot[:taste].index(entry.name)}
   %input{:type => "submit", :value => "Vote!"}
 
+%script{:type => 'text/javascript', :src => '/js/jquery-ui-1.8.7.custom.min.js'}
+:javascript
+  $(function() {
+    $('#sortable').sortable({
+      update: function(event, ui) {
+        $(ui.item[0]).parent().children().each(function(index,child) {
+          $(child).children('input').val(index);
+        })
+      }
+    });
+  })
