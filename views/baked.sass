@@ -1,0 +1,40 @@
+$white: #FFFFFF
+$black: #000000
+$grey: #555555
+$cyan: #48B3E6
+$magenta: #DD009A
+$yellow: #F2F23F
+
+html
+  font:
+    family: Arial, sans-serif
+    size: 12px
+    line-height: 18px
+    color: $grey
+  background-image: url("/img/bg.png")
+
+body
+  height: 100%
+
+.main
+  margin: 0 auto
+  padding: 0 22px 14px
+  width: 600px
+  background-color: $white
+  background-image: none
+
+h1
+  font:
+    size: 36px
+    weight: bold
+  padding-bottom: 9px
+  text-transform: uppercase
+
+h1.header
+  @extend .main
+  padding: 14px 22px
+  background-color: $black
+  color: $grey
+  font:
+    size: 22px
+    weight: normal

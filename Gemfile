@@ -5,6 +5,7 @@ gem 'mongoid', '~>2.0.0.beta'
 gem 'bson_ext'
 gem 'sinatra-mongoid', :require => 'sinatra/mongoid'
 gem 'haml'
+gem 'sass'
 gem 'carrierwave'
 gem 'rmagick'
 

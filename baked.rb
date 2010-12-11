@@ -69,6 +69,10 @@ class Baked < Sinatra::Base
     file.read
   end
 
+  get '/css/baked.css' do
+    sass :baked
+  end
+
   error Mongoid::Errors::DocumentNotFound do
     raise NotFound
   end
