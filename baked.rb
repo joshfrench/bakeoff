@@ -8,11 +8,6 @@ class Baked < Sinatra::Base
   set :public, File.dirname(__FILE__) + '/public'
   use Rack::MethodOverride
 
-  get '/entries' do
-    @entries = Entry.all
-    haml :'entries/index'
-  end
-
   get '/entries/new' do
     haml :'entries/new'
   end
@@ -30,13 +25,6 @@ class Baked < Sinatra::Base
       @entries = Entry.all
       haml :'entries/index'
     end
-  end
-
-  delete "/entries/:id" do
-    if entry = Entry.find(params[:id])
-      entry.destroy
-    end
-    redirect "/entries"
   end
 
   get '/vote' do
