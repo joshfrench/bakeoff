@@ -61,9 +61,6 @@ p
 a
   color: $cyan
 
-.buttons
-  margin-top: 14px
-
 .button
   +button
   +color($cyan)
@@ -76,6 +73,34 @@ a
 
 .magenta
   color: $magenta
+
+.buttons
+  margin-top: 14px
+
+.entry
+  width: 350px
+  height: 80px
+  position: relative
+  border: 1px solid $dark-grey
+  margin: 0 auto 22px
+  background-color: $white
+  +shadow
+  h3
+    font:
+      size: 22px
+      family: "Droid Serif", Arial, sans-serif
+      weight: normal
+    color: $cyan
+    width: 270px
+    position: absolute
+    margin: 0 auto
+    top: 35%
+  img
+    vertical-align: middle
+    position: absolute
+    right: 0
+
+    
 
 .row
   width: 400px

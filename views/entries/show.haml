@@ -1,2 +1,5 @@
-%h1= @entry.name
-%img{:src => @entry.image.url}
+%h1.yellow Your entry
+.entry
+  %h3= @entry.name
+  %img{:src => @entry.image.url}
+%p Good luck!
