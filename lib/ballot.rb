@@ -49,6 +49,7 @@ class Ballot
         ballots.each { |b| b.delete winners.last }
         winners << InstantRunoffVote.new(ballots).result.winner
       end
-      winners
+      # Mongoid criteria not respecting array order?
+      winners.map {|w| Entry.find(w) }
     end
 end
