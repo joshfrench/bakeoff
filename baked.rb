@@ -13,13 +13,8 @@ class Baked < Sinatra::Base
   end
 
   get '/vote' do
-    @ballot = Ballot.find_or_initialize_by(:ip => request.ip)
-    if @ballot.new_record?
-      @entries = Entry.all
-      haml :'votes/new'
-    else
-      haml :'votes/thanks'
-    end
+    @ballot = Ballot.new
+    haml :'votes/new'
   end
 
   post '/vote' do

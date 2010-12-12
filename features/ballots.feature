@@ -35,11 +35,6 @@ Feature: Submitting a ballot
     Then there should be 1 Ballot
     And I should see "I already have a vote from user 1@digitalpulp.com"
 
-  Scenario: Trying to vote again
-    Given a ballot exists
-    When I go to the ballot page
-    Then I should see "Thanks for voting"
-
   Scenario: Submitting an invalid vote
     Given I am on the ballot page
     When I fill in "ballot_name" with ""
