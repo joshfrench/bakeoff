@@ -1,14 +1,21 @@
 %h1.yellow And the winners are...
 %h3.magenta OMG! So excited!
 
-%h2.cyan Taste Category
-.taste
-  = partial :'entries/entry', :collection => @taste
+#vote
+  #taste
+    %h2 Taste
+    = partial :'entries/entry', :collection => @taste
 
-%h2.yellow Presentation Category
-.presentation
-  = partial :'/entries/entry', :collection => @presentation
+  #presentation
+    %h2 Presentation
+    = partial :'/entries/entry', :collection => @presentation
 
-%h2.magenta Creativity Category
-.creativity
-  = partial :'entries/entry', :collection => @creativity
+  #creativity
+    %h2 Creativity
+    = partial :'entries/entry', :collection => @creativity
+
+  #overall
+    %h1 Overall
+    = partial :'entries/entry', :collection => @overall
+
+  %h2.magenta Congratulations, and thanks to everyone for participating!

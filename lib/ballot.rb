@@ -51,6 +51,6 @@ class Ballot
         winners << InstantRunoffVote.new(ballots).result.winner
       end
       # Mongoid criteria not respecting array order?
-      winners.map {|w| Entry.find(w) }
+      winners.compact.map {|w| Entry.find(w) }
     end
 end

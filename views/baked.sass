@@ -96,6 +96,9 @@ ol
     weight: normal
 
 #vote
+  p
+    padding-top: 4px
+
   ul
     padding-bottom: 80
     input
@@ -107,16 +110,23 @@ ol
     cursor: default
 
   #taste
-    h1, h3, .entry
+    h1, h2, h3, .entry
       color: $cyan
 
   #presentation
-    h1, h3, .entry
+    h1, h2, h3, .entry
       color: $magenta
 
   #creativity
-    h1, h3, .entry
+    h1, h2, h3, .entry
       color: $yellow
+
+  #overall
+    border: 4px solid $cyan
+    +rounded(1em)
+    +shadow
+    h1, h2, h3, .entry
+      color: $cyan
 
 .buttons
   margin-top: 14px

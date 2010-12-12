@@ -20,5 +20,5 @@ Feature: Tabulating results
       
   Scenario: Viewing category winners
     When I go to the results page
-    Then I should see "Cookies Muffins Brownies" within ".taste"
-    And I should see "Muffins Cookies Brownies" within ".creativity"
+    Then I should see "Cookies Muffins Brownies" within "#taste"
+    And I should see "Muffins Cookies Brownies" within "#creativity"
