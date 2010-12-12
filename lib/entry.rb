@@ -2,6 +2,8 @@ require 'upload'
 
 class Entry
   include Mongoid::Document
+  include Mongoid::Timestamps
+
   field :name
   mount_uploader :image, Upload
   validates_presence_of :name

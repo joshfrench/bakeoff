@@ -2,6 +2,8 @@ require 'runoff'
 
 class Ballot
   include Mongoid::Document
+  include Mongoid::Timestamps
+
   field :ip
   field :name
   field :taste, :type => Array, :default => []

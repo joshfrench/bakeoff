@@ -7,6 +7,7 @@ require 'ballot'
 class Baked < Sinatra::Base
   set :public, File.dirname(__FILE__) + '/public'
   set :haml, :format => :html5
+  set :boot_time, Time.now
 
   configure :production do
     set :sass, :style => :compressed
@@ -27,11 +28,13 @@ class Baked < Sinatra::Base
   helpers Sinatra::Partials
 
   get '/' do
+    static_page
     haml :index
   end
 
   get '/vote' do
     not_found if ENV['POLLS_CLOSED']
+    last_modified Entry.max(:updated_at)
     @ballot = Ballot.new
     @taste = @creativity = @presentation = Entry.all.sort
     haml :'votes/new'
@@ -57,10 +60,12 @@ class Baked < Sinatra::Base
   end
 
   get '/vote/thanks' do
+    static_page
     haml :'/votes/thanks'
   end
 
   get '/entries/new' do
+    static_page
     @entry = Entry.new
     haml :'entries/new'
   end
@@ -76,11 +81,13 @@ class Baked < Sinatra::Base
 
   get "/entries/:id" do
     @entry = Entry.find(params[:id])
+    last_modified @entry.updated_at
     haml :'entries/show'
   end
 
   get '/results' do
     not_found unless ENV['POLLS_CLOSED']
+    last_modified Ballot.max(:updated_at)
     @overall = Ballot.overall
     @taste = Ballot.category(:taste)
     @creativity = Ballot.category(:creativity)
@@ -93,11 +100,14 @@ class Baked < Sinatra::Base
     fs = Mongo::GridFileSystem.new(Mongoid.database)
     file = fs.open(img, 'r')
     content_type file.content_type
+    last_modified file.upload_date
     headers 'Content-Length' => file.file_length.to_s
     file.read
   end
 
   get '/css/baked.css' do
+    file = File.join(File.dirname(__FILE__), %w(views baked.sass))
+    last_modified File.mtime(file)
     sass :baked
   end
 
@@ -110,11 +120,18 @@ class Baked < Sinatra::Base
   end
 
   not_found do
+    static_page
     haml :'404'
   end
 
   error do
+    static_page
     haml :'500'
+  end
+
+  def static_page
+    cache_control :public, :max_age => 60 * 60
+    etag options.boot_time.to_s
   end
 
 end
