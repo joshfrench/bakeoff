@@ -6,3 +6,10 @@ Given /^I have the following ballots:$/ do |table|
   end
 end
 
+Given /^the polls are closed$/ do
+  ENV['POLLS_CLOSED'] = 'true'
+end
+
+Given /^the polls are open$/ do
+  ENV['POLLS_CLOSED'] = nil
+end

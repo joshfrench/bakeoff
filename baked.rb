@@ -7,12 +7,14 @@ require 'ballot'
 class Baked < Sinatra::Base
   set :public, File.dirname(__FILE__) + '/public'
   set :haml, :format => :html5
-  set :environment, :production
 
   configure :production do
     set :sass, :style => :compressed
     set :raise_errors, false
     set :show_exceptions, false
+    use Rack::Auth::Basic do |username, password|
+      [username, password] == [ENV['DP_USER'], ENV['DP_PASS']]
+    end
   end
 
   CarrierWave.configure do |config|
@@ -29,12 +31,14 @@ class Baked < Sinatra::Base
   end
 
   get '/vote' do
+    not_found if ENV['POLLS_CLOSED']
     @ballot = Ballot.new
     @taste = @creativity = @presentation = Entry.all.sort
     haml :'votes/new'
   end
 
   post '/vote' do
+    not_found if ENV['POLLS_CLOSED']
     @ballot = Ballot.find_or_initialize_by_name(params[:ballot][:name])
     if @ballot.new_record?
       @ballot.from_hash(params[:ballot])
@@ -76,6 +80,7 @@ class Baked < Sinatra::Base
   end
 
   get '/results' do
+    not_found unless ENV['POLLS_CLOSED']
     @overall = Ballot.overall
     @taste = Ballot.category(:taste)
     @creativity = Ballot.category(:creativity)

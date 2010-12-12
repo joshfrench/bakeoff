@@ -41,3 +41,8 @@ Feature: Submitting a ballot
     And I press "Vote!"
     Then I should be on the ballot page
     And I should see "must enter your name"
+
+  Scenario: Once the polls are closed
+    Given the polls are closed
+    When I go to the ballot page
+    Then I should see "Not Found"

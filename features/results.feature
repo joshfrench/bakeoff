@@ -15,10 +15,13 @@ Feature: Tabulating results
       |127.0.0.2|Cookies, Muffins, Brownies|Muffins, Cookies, Brownies|
       |127.0.0.3|Cookies, Muffins, Brownies|Muffins, Cookies, Brownies|
   
-  Scenario: Viewing the overall results
-    
+  Scenario: Viewing while polls are open
+    Given the polls are open
+    When I go to the results page
+    Then I should see "Not Found"
       
   Scenario: Viewing category winners
+    Given the polls are closed
     When I go to the results page
     Then I should see "Cookies Muffins Brownies" within "#taste"
     And I should see "Muffins Cookies Brownies" within "#creativity"
