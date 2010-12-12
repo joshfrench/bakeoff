@@ -83,10 +83,19 @@ class Baked < Sinatra::Base
   end
 
   error Mongoid::Errors::DocumentNotFound do
-    raise NotFound
+    not_found
   end
 
   error Mongo::GridFileNotFound do
-    raise NotFound
+    not_found
   end
+
+  not_found do
+    haml :'404'
+  end
+
+  error do
+    haml :'500'
+  end
+
 end
