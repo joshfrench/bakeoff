@@ -32,7 +32,7 @@ module NavigationHelpers
       '/vote'
 
     when /the thanks page/
-      '/thanks'
+      '/vote/thanks'
 
     when /the results page/
       '/results'

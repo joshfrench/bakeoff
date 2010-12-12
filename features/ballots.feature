@@ -24,7 +24,7 @@ Feature: Submitting a ballot
     And I fill in "ballot_taste_muffins" with "1" within "#taste"
     And I fill in "ballot_taste_brownies" with "2" within "#taste"
     And I press "Vote!"
-    Then I should be on the ballot page
+    Then I should be on the thanks page
     And I should see "Thanks"
 
   Scenario: Submitting a duplicate ballot

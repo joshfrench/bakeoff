@@ -26,7 +26,7 @@ class Baked < Sinatra::Base
       @ballot.from_hash(params[:ballot])
       @ballot.ip = request.ip
       if @ballot.save
-        haml :'/votes/thanks'
+        redirect '/vote/thanks'
       else
         @taste = @ballot.taste.map {|e| Entry.find(e)}
         @creativity = @ballot.creativity.map {|e| Entry.find(e)}
@@ -36,6 +36,10 @@ class Baked < Sinatra::Base
     else
       haml :'votes/dupe'
     end
+  end
+
+  get '/vote/thanks' do
+    haml :'/votes/thanks'
   end
 
   get '/entries/new' do
