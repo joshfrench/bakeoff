@@ -19,9 +19,15 @@ class Baked < Sinatra::Base
   end
 
   CarrierWave.configure do |config|
-    config.grid_fs_database = Mongoid.database.name
-    config.storage = :grid_fs
-    config.grid_fs_access_url = "/gridfs"
+    if ENV['MONGOHQ_URL']
+      config.grid_fs_port = ENV['MONGOID_PORT']
+      config.grid_fs_username = ENV['MONGOID_USERNAME']
+      config.grid_fs_password = ENV['MONGOID_PASSWORD']
+    else
+      config.grid_fs_database = Mongoid.database.name
+      config.storage = :grid_fs
+      config.grid_fs_access_url = "/gridfs"
+    end
   end
 
   use Rack::MethodOverride
