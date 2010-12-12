@@ -12,17 +12,17 @@ Feature: Submitting a ballot
 
   Scenario: Filling out a new ballot
     Given I am on the ballot page
-    Then I should see "Brownies" within ".taste"
-    And I should see "Muffins" within ".taste"
-    And I should see "Cookies" within ".taste"
+    Then I should see "Brownies" within "#taste"
+    And I should see "Muffins" within "#taste"
+    And I should see "Cookies" within "#taste"
 
   Scenario: Submitting a new vote
     Given I am on the ballot page
     And there are no ballots
     When I fill in "ballot_name" with "Josh"
-    And I fill in "Cookies" with "0" within ".taste"
-    And I fill in "Muffins" with "1" within ".taste"
-    And I fill in "Brownies" with "2" within ".taste"
+    And I fill in "ballot_taste_cookies" with "0" within "#taste"
+    And I fill in "ballot_taste_muffins" with "1" within "#taste"
+    And I fill in "ballot_taste_brownies" with "2" within "#taste"
     And I press "Vote!"
     Then I should be on the ballot page
     And I should see "Thanks"

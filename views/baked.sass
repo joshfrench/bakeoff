@@ -65,6 +65,16 @@ p
 a
   color: $cyan
 
+ol, ul
+  width: 400px
+  margin: 14px auto
+  list-style-position: inside
+
+ol
+  text-align: left
+  li
+    list-style-type: decimal
+
 .button
   +button
   +color($cyan)
@@ -86,19 +96,27 @@ a
     weight: normal
 
 #vote
-  p
-    margin: 0
-    padding-top: 4px
-  ol
-    width: 400px
-    text-align: left
-    margin: 14px auto
+  ul
+    padding-bottom: 80
+    input
+      display: none
+
   li
     @extend h3
-    list-style:
-      position: inside
-      type: decimal
     margin-bottom: 14px
+    cursor: default
+
+  #taste
+    h1, h3, .entry
+      color: $cyan
+
+  #presentation
+    h1, h3, .entry
+      color: $magenta
+
+  #creativity
+    h1, h3, .entry
+      color: $yellow
 
 .buttons
   margin-top: 14px
@@ -125,8 +143,6 @@ a
     vertical-align: middle
     position: absolute
     right: 0
-
-    
 
 .row
   width: 400px

@@ -17,19 +17,66 @@
       %span.cyan Vote!
       %p.small Winners will be announced in the conference room at 5pm.
 
+  #taste
+    %h1 Taste
+    %h3 Drag the entries to rank them. Higher is better.
+    %ul#taste-list
+      - @taste.each_with_index do |entry,i|
+        %li
+          = partial :'entries/entry', :locals => {:entry => entry}
+          %input{:type => 'text', :name => "ballot[taste][#{entry.id}]", :id => "ballot_taste_#{entry.slug}", :value => i}
+
+  #presentation
+    %h1 Presentation
+    %h3 Drag the entries to rank them. Higher is better.
+    %ul#presentation-list
+      - @presentation.each_with_index do |entry,i|
+        %li
+          = partial :'entries/entry', :locals => {:entry => entry}
+          %input{:type => 'text', :name => "ballot[presentation][#{entry.id}]", :id => "ballot_presentation_#{entry.slug}", :value => i}
+
+  #creativity
+    %h1 Creativity
+    %h3 Drag the entries to rank them. Higher is better.
+    %ul#creativity-list
+      - @creativity.each_with_index do |entry,i|
+        %li
+          = partial :'entries/entry', :locals => {:entry => entry}
+          %input{:type => 'text', :name => "ballot[creativity][#{entry.id}]", :id => "ballot_creativity_#{entry.slug}", :value => i}
+
   %input.button{:type => 'submit', :value => 'Vote!'}
 
 
 %script{:type => 'text/javascript', :src => '/js/jquery-ui-1.8.7.custom.min.js'}
 :javascript
   $(function() {
-    $('#sortable').sortable({
+    $('#taste-list').sortable({
+      containment: $('#taste'),
       update: function(event, ui) {
-        $(ui.item[0]).parent().children().each(function(index,child) {
+        $('#taste-list').children().each(function(index,child) {
           $(child).children('input').val(index);
         })
       }
     });
+    $('#presentation-list').sortable({
+      containment: $('#presentation'),
+      update: function(event, ui) {
+        $('#presentation-list').children().each(function(index,child) {
+          $(child).children('input').val(index);
+        })
+      }
+    });
+    $('#creativity-list').sortable({
+      containment: $('#creativity'),
+      update: function(event, ui) {
+        $('#creativity-list').children().each(function(index,child) {
+          $(child).children('input').val(index);
+        })
+      }
+    });
+    $('ul').disableSelection();
+    $('#taste').sortable('option', 'containment', $('.taste'));
+    $('#presentation').sortable('option', 'containment', $('.presentation'));
     $('#ballot_name').focus(function() {
       if ($(this).val() == 'Enter your name')
         $(this).val('');
@@ -39,6 +86,10 @@
         $(this).val('Enter your name');
     });
     $('#vote').submit(function() {
+      if($('#ballot_name').val().trim() == '' || $('#ballot_name').val() == 'Enter your name') {
+        alert('Please enter your name.');
+        return false;
+      }
       return confirm("Submit this ballot? You only get one!");
     });
   })

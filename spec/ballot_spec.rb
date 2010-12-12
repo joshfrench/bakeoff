@@ -52,4 +52,5 @@ describe Ballot do
       Ballot.category(:taste).should eql [@alpha, @beta, @gamma]
     end
   end
+
 end

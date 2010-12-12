@@ -11,6 +11,7 @@ class Ballot
   validates_presence_of :ip
   validates_presence_of :name
   validates_uniqueness_of :name, :case_sensitive => false
+  validates_exclusion_of :name, :in => ["enter your name"]
 
   def from_hash(hash)
     self.name = hash.delete('name').downcase
