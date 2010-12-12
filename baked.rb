@@ -1,4 +1,5 @@
 require 'sinatra/base'
+require 'partials'
 require 'uri'
 require 'entry'
 require 'ballot'
@@ -7,6 +8,7 @@ require 'ballot'
 class Baked < Sinatra::Base
   set :public, File.dirname(__FILE__) + '/public'
   use Rack::MethodOverride
+  helpers Sinatra::Partials
 
   get '/' do
     haml :index
@@ -55,6 +57,7 @@ class Baked < Sinatra::Base
     @overall = Ballot.overall
     @taste = Ballot.category(:taste)
     @creativity = Ballot.category(:creativity)
+    @presentation = Ballot.category(:presentation)
     haml :'results/index'
   end
 

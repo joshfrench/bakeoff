@@ -1,5 +1,3 @@
 %h1.yellow Your entry
-.entry
-  %h3= @entry.name
-  %img{:src => @entry.image.url}
+= partial :'entries/entry', :locals => { :entry => @entry }
 %h2.magenta Good luck!

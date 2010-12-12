@@ -1,17 +1,14 @@
-.overall
-  %h2 Overall results:
-  %ol
-    = list_of @overall do |entry|
-      = entry
+%h1.yellow And the winners are...
+%h3.magenta OMG! So excited!
 
+%h2.cyan Taste Category
 .taste
-  %h2 Results, taste category:
-  %ol
-    = list_of @taste do |entry|
-      = entry
+  = partial :'entries/entry', :collection => @taste
 
+%h2.yellow Presentation Category
+.presentation
+  = partial :'/entries/entry', :collection => @presentation
+
+%h2.magenta Creativity Category
 .creativity
-  %h2 Results, creativity category:
-  %ol
-    = list_of @creativity do |entry|
-      = entry
+  = partial :'entries/entry', :collection => @creativity
