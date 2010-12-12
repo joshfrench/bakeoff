@@ -35,4 +35,7 @@
       if ($(this).val().trim() == '')
         $(this).val('Enter your name');
     });
+    $('#vote').submit(function() {
+      return confirm("Submit this ballot? You only get one!");
+    });
   })

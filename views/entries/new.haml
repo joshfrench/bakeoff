@@ -12,6 +12,7 @@
     .row
       %label{:for => "file"} Add an image:
       %input{:type => "file", :name => "entry[image]", :id => "entry_image"}
+      %p.small A photo will help people remember which entry is which.
     .buttons
       %input.button{:type => "submit", :value => "Add Entry"}
 
@@ -19,6 +20,6 @@
   $(function() {
     $('#entry').submit(function() {
       if (!$('#entry_image').val())
-        return confirm("Are you sure you don't want to add an image? It will help people remember what they're voting for.");
+        return confirm("Are you sure you don't want to add an image?");
     });
   })
