@@ -1,6 +1,9 @@
 %h1.yellow Cast your ballot
 
 %form#vote{:action => "/vote", :method => "post"}
+  - if @ballot.errors.any?
+    .error
+      %h3 Oops! You must enter your name.
   %ol
     %li
       %input{:type => "text", :name => "ballot[name]", :id => "ballot_name", :value => 'Enter your name'}

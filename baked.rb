@@ -27,8 +27,11 @@ class Baked < Sinatra::Base
     if @ballot.new_record?
       @ballot.from_hash(params[:ballot])
       @ballot.ip = request.ip
-      @ballot.save
-      redirect '/vote'
+      if @ballot.save
+        redirect '/vote'
+      else
+        haml :'votes/new'
+      end
     else
       haml :'votes/dupe'
     end

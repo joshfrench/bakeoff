@@ -39,3 +39,10 @@ Feature: Submitting a ballot
     Given a ballot exists
     When I go to the ballot page
     Then I should see "Thanks for voting"
+
+  Scenario: Submitting an invalid vote
+    Given I am on the ballot page
+    When I fill in "ballot_name" with ""
+    And I press "Vote!"
+    Then I should be on the ballot page
+    And I should see "must enter your name"
