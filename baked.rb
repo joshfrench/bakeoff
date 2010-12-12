@@ -33,7 +33,7 @@ class Baked < Sinatra::Base
   end
 
   get '/vote' do
-    not_found if ENV['POLLS_CLOSED']
+    not_found unless polls_open?
     last_modified Entry.max(:updated_at)
     @ballot = Ballot.new
     @taste = @creativity = @presentation = Entry.all.sort
@@ -41,7 +41,7 @@ class Baked < Sinatra::Base
   end
 
   post '/vote' do
-    not_found if ENV['POLLS_CLOSED']
+    not_found unless polls_open?
     @ballot = Ballot.find_or_initialize_by_name(params[:ballot][:name])
     if @ballot.new_record?
       @ballot.from_hash(params[:ballot])
@@ -86,7 +86,7 @@ class Baked < Sinatra::Base
   end
 
   get '/results' do
-    not_found unless ENV['POLLS_CLOSED']
+    not_found if polls_open?
     last_modified Ballot.max(:updated_at)
     @overall = Ballot.overall
     @taste = Ballot.category(:taste)
@@ -132,6 +132,14 @@ class Baked < Sinatra::Base
   def static_page
     cache_control :public, :max_age => 60 * 60
     etag options.boot_time.to_s
+  end
+
+  def development?
+    options.environment == :development
+  end
+
+  def polls_open?
+    development? or ENV['POLLS_CLOSED'].nil?
   end
 
 end
