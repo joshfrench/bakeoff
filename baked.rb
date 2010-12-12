@@ -4,9 +4,23 @@ require 'uri'
 require 'entry'
 require 'ballot'
 
-
 class Baked < Sinatra::Base
   set :public, File.dirname(__FILE__) + '/public'
+  set :haml, :format => :html5
+  set :environment, :production
+
+  configure :production do
+    set :sass, :style => :compressed
+    set :raise_errors, false
+    set :show_exceptions, false
+  end
+
+  CarrierWave.configure do |config|
+    config.grid_fs_database = Mongoid.database.name
+    config.storage = :grid_fs
+    config.grid_fs_access_url = "/gridfs"
+  end
+
   use Rack::MethodOverride
   helpers Sinatra::Partials
 
