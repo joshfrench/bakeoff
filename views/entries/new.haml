@@ -4,22 +4,22 @@
   .error
     %h3== Oops! The name #{@entry.errors.first[1]}. 
 
-%p
-  %form#entry{:action => "/entries", :method => "post", :enctype=>"multipart/form-data"}
-    .row
-      %label{:for => "entry_name"} Name of dish:
-      %input{:type => "text", :name=> "entry[name]", :id=>"entry_name"}
-    .row
-      %label{:for => "file"} Add an image:
-      %input{:type => "file", :name => "entry[image]", :id => "entry_image"}
-      %p.small A photo will help people remember which entry is which.
-    .buttons
-      %input.button{:type => "submit", :value => "Add Entry"}
+%form#entry{:action => "/entries", :method => "post", :enctype=>"multipart/form-data"}
+  .row
+    %label{:for => "entry_name"} Name of dish:
+    %input{:type => "text", :name=> "entry[name]", :id=>"entry_name"}
+  .row
+    %label{:for => "entry_image"} Add an image:
+    %input{:type => "file", :name => "entry[image]", :id => "entry_image"}
+    %p.small A photo will help people remember which entry is which.
+  .buttons
+    %input.button{:type => "submit", :value => "Add Entry"}
 
 :javascript
   $(function() {
     $('#entry').submit(function() {
-      if (!$('#entry_image').val())
+      if (!$('#entry_image').val()) {
         return confirm("Are you sure you don't want to add an image?");
+      }
     });
-  })
+  });

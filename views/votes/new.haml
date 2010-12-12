@@ -55,7 +55,7 @@
       update: function(event, ui) {
         $('#taste-list').children().each(function(index,child) {
           $(child).children('input').val(index);
-        })
+        });
       }
     });
     $('#presentation-list').sortable({
@@ -63,7 +63,7 @@
       update: function(event, ui) {
         $('#presentation-list').children().each(function(index,child) {
           $(child).children('input').val(index);
-        })
+        });
       }
     });
     $('#creativity-list').sortable({
@@ -71,19 +71,21 @@
       update: function(event, ui) {
         $('#creativity-list').children().each(function(index,child) {
           $(child).children('input').val(index);
-        })
+        });
       }
     });
     $('ul').disableSelection();
     $('#taste').sortable('option', 'containment', $('.taste'));
     $('#presentation').sortable('option', 'containment', $('.presentation'));
     $('#ballot_name').focus(function() {
-      if ($(this).val() == 'Enter your name')
+      if ($(this).val() == 'Enter your name') {
         $(this).val('');
+      }
     });
     $('#ballot_name').blur(function() {
-      if ($(this).val().trim() == '')
+      if ($(this).val().trim() == '') {
         $(this).val('Enter your name');
+      }
     });
     $('#vote').submit(function() {
       if($('#ballot_name').val().trim() == '' || $('#ballot_name').val() == 'Enter your name') {
@@ -92,4 +94,4 @@
       }
       return confirm("Submit this ballot? There's no going back!");
     });
-  })
+  });
