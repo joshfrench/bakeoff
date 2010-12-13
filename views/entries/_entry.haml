@@ -1,3 +1,4 @@
 .entry
   %h3= entry.name
-  %img{:src => entry.image.url}
+  - if entry.image.url
+    %img{:src => entry.image.url}
