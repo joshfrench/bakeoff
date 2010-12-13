@@ -1,37 +1,52 @@
 require 'sinatra/base'
 require 'partials'
 require 'uri'
-require 'entry'
-require 'ballot'
 
 class Baked < Sinatra::Base
   set :public, File.dirname(__FILE__) + '/public'
   set :haml, :format => :html5
   set :boot_time, Time.now
 
+  configure :development do
+    Mongoid.database = Mongo::Connection.new('localhost', Mongo::Connection::DEFAULT_PORT).db('baked_dev')
+  end
+
   configure :production do
-    set :sass, :style => :compressed
-    set :raise_errors, false
-    set :show_exceptions, false
+    require 'uri'
+    mongo_uri = URI.parse(ENV['MONGOHQ_URL'])
+    ENV['MONGOID_HOST'] = mongo_uri.host
+    ENV['MONGOID_PORT'] = mongo_uri.port.to_s
+    ENV['MONGOID_USERNAME'] = mongo_uri.user
+    ENV['MONGOID_PASSWORD'] = mongo_uri.password
+    ENV['MONGOID_DATABASE'] = mongo_uri.path.gsub("/", "")
+    Mongoid.database = Mongo::Connection.new(ENV['MONGOID_HOST'], ENV['MONGOID_PORT']).db(ENV['MONGOID_DATABASE'])
+    Mongoid.database.authenticate(ENV['MONGOID_USERNAME'], ENV['MONGOID_PASSWORD'])
+
     use Rack::Auth::Basic do |username, password|
       [username, password] == [ENV['DP_USER'], ENV['DP_PASS']]
     end
+
+    set :sass, :style => :compressed
+    set :raise_errors, false
+    set :show_exceptions, false
   end
 
   CarrierWave.configure do |config|
+    config.grid_fs_database = Mongoid.database.name
+    config.storage = :grid_fs
+    config.grid_fs_access_url = "/gridfs"
     if ENV['MONGOHQ_URL']
       config.grid_fs_port = ENV['MONGOID_PORT']
       config.grid_fs_username = ENV['MONGOID_USERNAME']
       config.grid_fs_password = ENV['MONGOID_PASSWORD']
-    else
-      config.grid_fs_database = Mongoid.database.name
-      config.storage = :grid_fs
-      config.grid_fs_access_url = "/gridfs"
     end
   end
 
   use Rack::MethodOverride
   helpers Sinatra::Partials
+
+  require 'entry'
+  require 'ballot'
 
   get '/' do
     static_page
