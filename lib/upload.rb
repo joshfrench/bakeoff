@@ -13,4 +13,8 @@ class Upload < CarrierWave::Uploader::Base
   def extension_whitelist
     %w(jpg jpeg gif png)
   end
+
+  def cache_dir
+    ENV['TMPDIR']
+  end
 end
