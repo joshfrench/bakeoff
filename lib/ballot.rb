@@ -1,4 +1,4 @@
-require 'runoff'
+require 'positional'
 
 class Ballot
   include Mongoid::Document
@@ -50,7 +50,7 @@ class Ballot
       return winners if ballots.compact.empty?
       3.times do
         ballots.each { |b| b.delete winners.last }
-        winners << InstantRunoffVote.new(ballots).result.winner
+        winners << BordaVote.new(ballots).result.winner
       end
       # Mongoid criteria not respecting array order?
       winners.compact.map {|w| Entry.find(w) }
