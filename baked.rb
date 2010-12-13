@@ -36,6 +36,7 @@ class Baked < Sinatra::Base
     config.storage = :grid_fs
     config.grid_fs_access_url = "/gridfs"
     if ENV['MONGOHQ_URL']
+      config.grid_fs_host = ENV['MONGOID_HOST']
       config.grid_fs_port = ENV['MONGOID_PORT']
       config.grid_fs_username = ENV['MONGOID_USERNAME']
       config.grid_fs_password = ENV['MONGOID_PASSWORD']
