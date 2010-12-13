@@ -75,8 +75,6 @@
       }
     });
     $('ul').disableSelection();
-    $('#taste').sortable('option', 'containment', $('.taste'));
-    $('#presentation').sortable('option', 'containment', $('.presentation'));
     $('#ballot_name').focus(function() {
       if ($(this).val() == 'Enter your name') {
         $(this).val('');
