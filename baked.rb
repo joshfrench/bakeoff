@@ -8,7 +8,7 @@ class Baked < Sinatra::Base
   set :boot_time, Time.now
 
   configure :development do
-    Mongoid.database = Mongo::Connection.new('localhost', Mongo::Connection::DEFAULT_PORT).db('baked_dev')
+    Mongoid.database = Mongo::Connection.new('localhost', Mongo::Connection::DEFAULT_PORT).db('bakeoff')
   end
 
   configure :production do
