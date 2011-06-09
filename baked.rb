@@ -101,6 +101,10 @@ class Baked < Sinatra::Base
     end
   end
 
+  get '/entries/entries.js' do
+    coffee :'entries/entries'
+  end
+
   get "/entries/:id" do
     @entry = Entry.find(params[:id])
     last_modified @entry.updated_at

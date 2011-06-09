@@ -7,6 +7,7 @@ gem 'haml'
 gem 'sass'
 gem 'carrierwave'
 gem 'rmagick'
+gem 'coffee-script'
 
 group :development do
   gem 'heroku'
