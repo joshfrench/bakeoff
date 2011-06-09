@@ -86,6 +86,10 @@ class Baked < Sinatra::Base
     haml :'/votes/thanks'
   end
 
+  get '/vote/vote.js' do
+    coffee :'/votes/vote'
+  end
+
   get '/entries/new' do
     static_page
     @entry = Entry.new

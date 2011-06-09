@@ -48,48 +48,4 @@
 
 
 %script{:type => 'text/javascript', :src => '/js/jquery-ui-1.8.7.custom.min.js'}
-:javascript
-  $(function() {
-    $('#taste-list').sortable({
-      containment: $('#taste'),
-      update: function(event, ui) {
-        $('#taste-list').children().each(function(index,child) {
-          $(child).children('input').val(index);
-        });
-      }
-    });
-    $('#presentation-list').sortable({
-      containment: $('#presentation'),
-      update: function(event, ui) {
-        $('#presentation-list').children().each(function(index,child) {
-          $(child).children('input').val(index);
-        });
-      }
-    });
-    $('#creativity-list').sortable({
-      containment: $('#creativity'),
-      update: function(event, ui) {
-        $('#creativity-list').children().each(function(index,child) {
-          $(child).children('input').val(index);
-        });
-      }
-    });
-    $('ul').disableSelection();
-    $('#ballot_name').focus(function() {
-      if ($(this).val() == 'Enter your name') {
-        $(this).val('');
-      }
-    });
-    $('#ballot_name').blur(function() {
-      if ($(this).val().trim() == '') {
-        $(this).val('Enter your name');
-      }
-    });
-    $('#vote').submit(function() {
-      if($('#ballot_name').val().trim() == '' || $('#ballot_name').val() == 'Enter your name') {
-        alert('Please enter your name.');
-        return false;
-      }
-      return confirm("Submit this ballot? There's no going back!");
-    });
-  });
+%script{:src => 'vote/vote.js'}
